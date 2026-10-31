@@ -1,0 +1,12 @@
+grupo:
+João Pedro Duarte Sá
+Luca Borges
+Thiago Sales rodrigues
+
+o arquivo log gerado é sempre gerado no mesmo diretório do executável e foi movido para o topo para o envio
+
+o log presente foi executado com A e B com os seguintes valores respectivamente:
+1 - 1 e 0
+2 - 1 e 1
+3 - 0 e 0
+4 - 0 e 1
