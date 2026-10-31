@@ -1,0 +1,3 @@
+/home/dsjoao/Projects/emulador_cpu/CPU-EMULATOR/build/CMakeFiles/emulador.dir
+/home/dsjoao/Projects/emulador_cpu/CPU-EMULATOR/build/CMakeFiles/edit_cache.dir
+/home/dsjoao/Projects/emulador_cpu/CPU-EMULATOR/build/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/emulador.dir/link.d CMakeFiles/emulador.dir/src/main.cpp.o CMakeFiles/emulador.dir/src/CPU.cpp.o CMakeFiles/emulador.dir/src/ULA.cpp.o -o /home/dsjoao/Projects/emulador_cpu/CPU-EMULATOR/textos/emulador
