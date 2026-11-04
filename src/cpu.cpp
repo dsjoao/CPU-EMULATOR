@@ -8,9 +8,9 @@ int pc = 1;
 
 std::vector<std::string> divide_Strings(const std::string &ir){
     std::vector<std::string> str;
-    str[0] = ir.substr(0, 8);
-    str[1] = ir.substr(8,9);
-    str[2] = ir.substr(16, 4);
+    str.push_back(ir.substr(0 ,8));
+    str.push_back(ir.substr(8 ,9));
+    str.push_back(ir.substr(17,4));
     return str;
 }
 
