@@ -4,16 +4,16 @@
 #include <string>
 #include <vector>
 #include "ula.cpp"
+//#include "cpu.cpp"
 
 bool a=1, b=1;
 
 SaidaUla carrega_ula(const std::string &ir, bool a, bool b){
     std::vector<int> imput;
-    for(size_t i = 0; i < 6; i++)
+    for(size_t i = 0; i < 8; i++)
         imput.push_back(ir[i] - '0');
-    return ula(imput[0], imput[1], imput[2], imput[3], imput[4], imput[5], a, b);
+    return ula(imput[0], imput[1], imput[2], imput[3], imput[4], imput[5], imput[6], imput[7], a, b);
 }
-
 
 int main() {
     std::string ir; // registrador de instrução
@@ -37,7 +37,7 @@ int main() {
 
     while(getline(entrada,ir)){
         if(!ir.empty() && ir.back() == '\r') ir.pop_back();
-        if(ir.size() != 6) break;
+        if(ir.size() != 8) break;
         log << "------------------------------------------" << '\n';
         log << "Ciclo: " << pc << '\n' << '\n';
         log << "PC = "   << pc << '\n';

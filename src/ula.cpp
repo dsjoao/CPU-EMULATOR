@@ -1,7 +1,7 @@
 #include<bits/stdc++.h>
-struct SaidaUla {bool saida; bool vaiUm;};
+struct SaidaUla {int saida; bool vaiUm; bool n; bool z;};
 
-SaidaUla ula(bool f0, bool f1, bool ena, bool enb, bool inva, bool vemUm, bool a, bool b){
+SaidaUla ula(bool sll8, bool sra1, bool f0, bool f1, bool ena, bool enb, bool inva, bool vemUm, bool a, bool b){
     // --- primeiras entradas ---
     bool e3 =   b and enb;
     bool e2 =   a and ena;
@@ -29,8 +29,22 @@ SaidaUla ula(bool f0, bool f1, bool ena, bool enb, bool inva, bool vemUm, bool a
     bool s6 =            s2 or s3;
     // ----------------------------
     // --- saidas ---
-    bool saida = ul3 or ul4 or ul5 or s5;
+    bool z, n;
+    int saida = ul3 or ul4 or ul5 or s5;
     bool vaiUm = s6;
 
-    return {saida, vaiUm};
+    if(saida == 0){
+        z = 1;
+    }else if(saida < 0){
+        n = 1; z = 0;
+    }else{
+        n = 0; z = 0;
+    }
+    // deslocamento lógico
+    if(sll8)
+        saida = (saida << 8);
+    else if(sra1)
+        saida =  (saida > 1);
+    // ----------------------------
+    return {saida, vaiUm, n, z};
 }
