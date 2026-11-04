@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/luca/Projetos/CPU-EMULATOR/build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
