@@ -13,9 +13,13 @@ std::vector<std::string> divide_Strings(const std::string &ir){
     str.push_back(ir.substr(17,4));
     return str;
 }
-
-SaidaUla carrega_ula(const std::string &ir, bool a, bool b){
-    std::vector<int> imput;
+/*SAIDA DA ULA
+ * Ela recebe uma string de tamanho == 8
+ * A partir dela, tranforma em um vetor de bool, os colocando como
+ * entrada da ula e retornando o resultado;
+ */
+SaidaUla carrega_ula(const std::string &ir, std::vector<bool> a, std::vector<bool> b){
+    std::vector<bool> imput;
     for(size_t i = 0; i < 8; i++)
         imput.push_back(ir[i] - '0');
     return ula(imput[0], imput[1], imput[2], imput[3], imput[4], imput[5],imput[6], imput[7], a, b);

@@ -12,9 +12,9 @@ SaidaUla ula(bool sll8, bool sra1, bool f0, bool f1, bool ena, bool enb, bool in
     // ----------------------------
     for(int i=0; i < 32; i++){
         // --- primeiras entradas ---
-        bool e3 =   b[i] and enb;
-        bool e2 =   a[i] and ena;
-        bool e1 =    inva xor e2;
+        bool e3 =   b[31-i] and enb;
+        bool e2 =   a[31-i] and ena;
+        bool e1 =       inva xor e2;
         // ----------------------------
         // --- decodificador ---
         bool d1 = !f0 and !f1;
