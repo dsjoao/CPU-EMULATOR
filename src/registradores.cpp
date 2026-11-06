@@ -3,9 +3,10 @@
 #include <iostream>
 using namespace std;
 
-int32_t h, opc, tos, cpp, lv, sp, pc, mdr, mar, mbr, mbru;
+int32_t h, opc, tos, cpp, lv, sp, pc, mdr, mar;
+uint8_t mbr;
 
-void carrega_regist_barr_c(int i, int32_t entrada){
+void escreve_barr_c(int i, int32_t entrada){
 	switch (i) {
 		case 0:
 			mar = entrada;
@@ -38,26 +39,17 @@ void carrega_regist_barr_c(int i, int32_t entrada){
 	}
 }
 
-int32_t carrega_ula_barr_b(int registrador){
+int32_t le_barr_b(int registrador){
 	switch (registrador) {
-		case 0:
-			return  mdr;
-		case 1:
-			return   pc;
-		case 2:
-			return  mbr;
-		case 3:
-			return mbru;
-		case 4:
-			return   sp;
-		case 5:
-			return   lv;
-		case 6:
-			return  cpp;
-		case 7:
-			return  tos;
-		case 8:
-			return  opc;
+		case 0: return mdr;
+		case 1: return pc;
+		case 2: return (int8_t)mbr;
+		case 3: return mbr;
+		case 4: return sp;
+		case 5: return lv;
+		case 6: return cpp;
+		case 7: return tos;
+		case 8: return opc;
 		default: cout << "ERRO, NÃO FOI FORNECIDO UM REGISTRADOR VALIDO PARA O BARRAMENTO B";
 	}
 	return 0;

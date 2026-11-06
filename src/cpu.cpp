@@ -3,86 +3,59 @@
 #include <string>
 #include <vector>
 #include "ula.cpp"
-#include "cont_b.cpp"
-#include "cont_c.cpp"
 #include "registradores.cpp"
-
-int cont = 1;
 using namespace std;
+
 // --- funções de utilidade ---
+int traducao(const string &str){
+	return stoi(str, nullptr,2);
+}
+
 /*
- * @brief divide uma string geral entre seus dados relevantes, ainda em string
+ * @brief divide uma string geral entre seus dados relevantes
  * @param ir string de bits de entrada (21 bits)
- * @return vector<string> com cada um dos dados da entrada padrão:
- * str[0] = O que a ula vai fazer
- * str[1] = quais registradores do barr c serão sobre escritos
- * str[2] = qual registrador vai fornecer os dados para o barr b
+ * @return vector<int32_t> com cada um dos dados da entrada padrão:
+ * saida[0] = O que a ula vai fazer
+ * saida[1] = quais registradores do barr c serão sobre escritos
+ * saida[2] = qual registrador vai fornecer os dados para o barr b
  */
-vector<string> divide_Strings(const string &ir){
-    vector<string> str;
-    str.push_back(ir.substr(0 ,8));
-    str.push_back(ir.substr(8 ,9));
-    str.push_back(ir.substr(17,4));
-    return str;
-}
-
-/*
- * @brief string -> valor de entrada do barramento b
- * @param ir string de bits de entrada (4 bits)
- * @return indice do registrador que será ativo
- */
-int decode_barr_b(const string &ir){
-    vector<int> imput;
-    return stoi(ir,nullptr, 2);
-}
-
-/*
- * @brief string -> registradores que serão ativos no barr c
- * @param ir string de bits de entrada (9 bits)
- * @return vector<bool> de registradores que receberão os dados da ula
- */
-vector<bool> decode_barr_c(const string &ir){
-    vector<bool> imput;
-    for(size_t i = 0; i < 9; i++)
-        imput.push_back(ir[i] - '0');
-    return imput;
+vector<int32_t> entrada_to_comandos(const string &ir){
+    vector<int32_t> saida(3);
+    saida[0] = traducao((ir.substr(0 ,8)));
+    saida[1] = traducao((ir.substr(8 ,9)));
+    saida[2] = traducao((ir.substr(17,4)));
+    return saida;
 }
 // -----------------------------------------------------------------------
-// --- funções que carregam dados ---
-/*SAIDA DA ULA
- * Ela recebe uma string de tamanho == 8
- * A partir dela, tranforma em um vetor de bool, os colocando como
- * entrada da ula e retornando o resultado;
+/*
+ * @brief carrega os dados na ULA e devolve o resultado
+ * @param int32_t dados do que a ula vai fazer
+ * @return SaidaUla {int saida; bool vaiUm; bool n; bool z;}
  */
-SaidaUla carrega_ula(const string &ir, vector<bool> a, vector<bool> b){
-    vector<bool> imput;
-    for(size_t i = 0; i < 8; i++)
-        imput.push_back(ir[i] - '0');
-    return ula(imput[0], imput[1], imput[2], imput[3], imput[4], imput[5],imput[6], imput[7], a, b);
+SaidaUla carrega_ula(int32_t in, int32_t a, int32_t b){
+    return ula((in >> 7)&1,(in >> 6)&1,(in >> 5)&1,(in >> 4)&1,(in >> 3)&1,(in >> 2)&1,(in >> 1)&1,in&1, a, b);
 }
 
 // -----------------------------------------------------------------------
-// --- Operações com os barramentos ---
 /*
  * @brief recebe a entrada e os registradores que seram escritos
- * @param vector<bool> registrador_ativo -> quais registradores terão seus dados sobre escritos
+ * @param int32_t registrador_ativo -> quais registradores terão seus dados sobre escritos
  * @param int32_t entrada -> a saida da ULA (o que vc quer escrever)
  */
-void barramento_c(vector<bool>regist_ativo, int32_t entrada){
+void barramento_c(int32_t registradores, int32_t entrada){
 	for(int i=0; i < 9; i++){
-		if(regist_ativo[i]){
-			carrega_regist_barr_c(8-i, entrada); // 8-i para acessar na ordem correta
+		if((registradores >> i) & 1){
+			escreve_barr_c(i, entrada);
 		}
 	}
 }
 
 /*
- * @brief String -> int32_t
- * @param ir string de bits do barramento b (4 bits)
+ * @brief int32_t -> int32_t
+ * @param int32_t -> o registrador que sera ativado para pegar dados no barr b
  * @return valor da variável B que entra na ULA
  */
-int32_t barramento_b(const string &ir){
-	int registrador = decode_barr_b(ir);
-	int32_t entrada = carrega_ula_barr_b(registrador);
-	return entrada;
+int32_t barramento_b(int32_t registrador){
+	int32_t entrada = le_barr_b(registrador);
+	return  entrada;
 }

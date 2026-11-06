@@ -1,20 +1,23 @@
 #include<bits/stdc++.h>
 #include <cstdint>
-#include <vector>
 struct SaidaUla {int saida; bool vaiUm; bool n; bool z;};
 
-SaidaUla ula(bool sll8, bool sra1, bool f0, bool f1, bool ena, bool enb, bool inva, bool vemUm, std::vector<bool> a, std::vector<bool> b){
+SaidaUla ula(bool sll8, bool sra1, bool f0, bool f1, bool ena, bool enb, bool inva, bool vemUm, int32_t a, int32_t b){
     // --- definindo váriaveis ---
-    int32_t saida;
+    int32_t        saida;
     bool vaiUm, n=0, z=0;
-    bool carry = vemUm;
-    uint32_t result = 0;
+    bool   carry = vemUm;
+    uint32_t  result = 0;
     // ----------------------------
     for(int i=0; i < 32; i++){
+    	// --- a,b no indice i ---
+     	bool a_i = ((uint32_t)a >> i) & 1;
+      	bool b_i = ((uint32_t)b >> i) & 1;
+       	// ----------------------------
         // --- primeiras entradas ---
-        bool e3 =   b[31-i] and enb;
-        bool e2 =   a[31-i] and ena;
-        bool e1 =      inva xor  e2;
+        bool e3 =   b_i and enb;
+        bool e2 =   a_i and ena;
+        bool e1 =  inva xor  e2;
         // ----------------------------
         // --- decodificador ---
         bool d1 = !f0 and !f1;
@@ -44,8 +47,8 @@ SaidaUla ula(bool sll8, bool sra1, bool f0, bool f1, bool ena, bool enb, bool in
         // ----------------------------
     }
     // --- saidas ---
-    vaiUm = carry;
-    saida =(int32_t) result;
+    vaiUm =            carry;
+    saida = (int32_t) result;
     if(saida == 0)
         z = 1;
     else if(saida < 0)
@@ -53,7 +56,7 @@ SaidaUla ula(bool sll8, bool sra1, bool f0, bool f1, bool ena, bool enb, bool in
     // ----------------------------
     // --- deslocamento lógico ---
     if(sll8)
-        saida = (saida << 8);
+        saida = (int32_t)((uint32_t)saida << 8);
     else if(sra1)
         saida = (saida >> 1);
     // ----------------------------

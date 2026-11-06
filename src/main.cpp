@@ -1,12 +1,12 @@
 #include<bits/stdc++.h>
+#include <cstdint>
 #include <fstream>
 #include <iostream>
 #include <string>
-#include <vector>
 #include "cpu.cpp"
 
 int main() {
-	std::vector<bool> a,b;
+	int32_t a,b;
     std::string ir; // registrador de instrução
     int pc = 1;
 
