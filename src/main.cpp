@@ -13,21 +13,23 @@ int main()
 
     CPU CPU;
 
-    int32_t A = 1, B = -2147483648 ;
+    CPU.reg.MAR = 0;
+    CPU.reg.MDR = 0;
+    CPU.reg.TOS = 2;
+    CPU.reg.OPC = 0;
+    CPU.reg.PC  = 0;
+    CPU.reg.SP  = 0;
+    CPU.reg.H   = 1;
+    CPU.reg.LV  = 0;
+    CPU.reg.CPP = 0;
+    CPU.reg.MBR = 65;
+
+
 
     log << "~~~~~~~~~~~~~~~~~ COMEÇO DO PROGRAMA ~~~~~~~~~~~~~~~~~\n";
 
     log <<"\n=-=-=-=-=-=-=-=-=-=-=-=-=!!!!=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 
-    log << "PC = " << CPU.reg.PC << "\n";
-    log << "IR = " << CPU.reg.IR << "\n";
-    log << "valor de A = " << static_cast<std::bitset<32>>(A) << "\n";
-    log << "valor de B = " << static_cast<std::bitset<32>>(B) << "\n";
-    log << "saída = " << static_cast<std::bitset<32>>(CPU.output) << "\n";
-    log << "saída pós deslocador = " << static_cast<std::bitset<32>>(CPU.output) << "\n";
-    log << "N = " << CPU.m_ULA.signals.N << "\n";
-    log << "Z = " << CPU.m_ULA.signals.Z << "\n";
-    log << "carry out = " << CPU.m_ULA.signals.carry_out << "\n";
 
     log << "\n-=-=-=-=-=-=-=-=-=-=-=-=####=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 
@@ -35,20 +37,11 @@ int main()
 
     while (std::getline(file,buff))
     {
-        CPU.cpu_cicle(buff,A,B);
+        CPU.cpu_cicle(buff);
 
         log <<"\n=-=-=-=-=-=-=-=-=-=-=-=-=!!!!=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 
-        log << "PC = " << CPU.reg.PC << "\n";
-        log << "IR = " << CPU.reg.IR << "\n";
-        if(CPU.reg.IR[0] == '1' && CPU.reg.IR[1] == '1') { log << "incorrect control signals \n-=-=-=-=-=-=-=-=-=-=-=-=####=-=-=-=-=-=-=-=-=-=-=-=-=\n"; continue;}
-        log << "valor de A = " << static_cast<std::bitset<32>>(A) << "\n";
-        log << "valor de B = " << static_cast<std::bitset<32>>(B) << "\n";
-        log << "saída = " << static_cast<std::bitset<32>>(CPU.m_ULA.output) << "\n";
-        log << "saída pós deslocador = " << static_cast<std::bitset<32>>(CPU.output) << "\n";
-        log << "N = " << CPU.m_ULA.signals.N << "\n";
-        log << "Z = " << CPU.m_ULA.signals.Z << "\n";
-        log << "carry out = " << CPU.m_ULA.signals.carry_out << "\n";
+
 
         log << "\n-=-=-=-=-=-=-=-=-=-=-=-=####=-=-=-=-=-=-=-=-=-=-=-=-=\n";
 

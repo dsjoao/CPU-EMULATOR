@@ -39,7 +39,6 @@
 
         this->output = res;
 
-        if(op[SLL8] & op[SRA1]) res = 0xfffffffe;
         if(op[SLL8]) 			res ILSHIFT 8;
         if(op[SRA1]) 			res IRSHIFT 1;
 
