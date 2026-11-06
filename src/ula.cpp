@@ -1,13 +1,13 @@
 #include<bits/stdc++.h>
 #include <cstdint>
-struct SaidaUla {int saida; bool vaiUm; bool n; bool z;};
+struct SaidaUla {int32_t saida; int32_t saidad; bool vaiUm; bool n; bool z;};
 
 SaidaUla ula(bool sll8, bool sra1, bool f0, bool f1, bool ena, bool enb, bool inva, bool vemUm, int32_t a, int32_t b){
     // --- definindo váriaveis ---
-    int32_t        saida;
-    bool vaiUm, n=0, z=0;
-    bool   carry = vemUm;
-    uint32_t  result = 0;
+    int32_t saida, saidad;
+    bool  vaiUm, n=0, z=0;
+    bool    carry = vemUm;
+    uint32_t   result = 0;
     // ----------------------------
     for(int i=0; i < 32; i++){
     	// --- a,b no indice i ---
@@ -55,10 +55,11 @@ SaidaUla ula(bool sll8, bool sra1, bool f0, bool f1, bool ena, bool enb, bool in
         n = 1;
     // ----------------------------
     // --- deslocamento lógico ---
+    saidad = saida;
     if(sll8)
-        saida = (int32_t)((uint32_t)saida << 8);
+        saidad = (int32_t)((uint32_t)saida << 8);
     else if(sra1)
-        saida = (saida >> 1);
+        saidad = (saida >> 1);
     // ----------------------------
-    return {saida, vaiUm, n, z};
+    return {saida, saidad, vaiUm, n, z};
 }

@@ -312,4 +312,6 @@ CMakeFiles/emulador.dir/src/main.cpp.o: \
  /usr/include/c++/16/bits/fs_dir.h /usr/include/c++/16/bits/fs_ops.h \
  /usr/include/c++/16/memory_resource /usr/include/c++/16/barrier \
  /usr/include/c++/16/latch /usr/include/c++/16/syncstream \
- /home/luca/Projetos/CPU-EMULATOR/src/ula.cpp
+ /home/luca/Projetos/CPU-EMULATOR/src/cpu.cpp \
+ /home/luca/Projetos/CPU-EMULATOR/src/ula.cpp \
+ /home/luca/Projetos/CPU-EMULATOR/src/registradores.cpp

@@ -3,53 +3,55 @@
 #include <iostream>
 using namespace std;
 
-int32_t h, opc, tos, cpp, lv, sp, pc, mdr, mar;
-uint8_t mbr;
+struct Reg {
+	int32_t h=0, opc=0, tos=0, cpp=0, lv=0, sp=0, pc=0, mdr=0, mar=0;
+	uint8_t mbr=0;
+};
 
-void escreve_barr_c(int i, int32_t entrada){
+void escreve_barr_c(Reg &r, int i, int32_t entrada){
 	switch (i) {
 		case 0:
-			mar = entrada;
+			r.mar = entrada;
 			break;
 		case 1:
-			mdr = entrada;
+			r.mdr = entrada;
 			break;
 		case 2:
-			pc  = entrada;
+			r.pc  = entrada;
 			break;
 		case 3:
-			sp  = entrada;
+			r.sp  = entrada;
 			break;
 		case 4:
-			lv  = entrada;
+			r.lv  = entrada;
 			break;
 		case 5:
-			cpp = entrada;
+			r.cpp = entrada;
 			break;
 		case 6:
-			tos = entrada;
+			r.tos = entrada;
 			break;
 		case 7:
-			opc = entrada;
+			r.opc = entrada;
 			break;
 		case 8:
-			h   = entrada;
+			r.h   = entrada;
 			break;
 		default: cout << "ERRO, TENTOU ESCREVER EM UM REGISTRADOR INESISTENTE DO BARRAMENTO C";
 	}
 }
 
-int32_t le_barr_b(int registrador){
+int32_t le_barr_b(Reg r, int registrador){
 	switch (registrador) {
-		case 0: return mdr;
-		case 1: return pc;
-		case 2: return (int8_t)mbr;
-		case 3: return mbr;
-		case 4: return sp;
-		case 5: return lv;
-		case 6: return cpp;
-		case 7: return tos;
-		case 8: return opc;
+		case 0: return r.mdr;
+		case 1: return r.pc;
+		case 2: return (int8_t)r.mbr;
+		case 3: return r.mbr;
+		case 4: return r.sp;
+		case 5: return r.lv;
+		case 6: return r.cpp;
+		case 7: return r.tos;
+		case 8: return r.opc;
 		default: cout << "ERRO, NÃO FOI FORNECIDO UM REGISTRADOR VALIDO PARA O BARRAMENTO B";
 	}
 	return 0;
