@@ -1,51 +1,48 @@
 #include <cstdint>
 #include <string>
+#include <vector>
 #include "ULA.hpp"
 #include "operations.hpp"
 
 
-    void ULA::decode(std::string &instruction_buff)
+    std::vector<uint8_t> ULA::decode(std::string &instruction_buff)
     {
-        for (size_t i = 0; i < 6; i++)
-        {
+    	std::vector<uint8_t> instruction(8);
+        for (size_t i = 0; i < 8; i++)
             instruction[i] = instruction_buff[i] - '0';
-        }
 
-        if(!instruction[F0])
-            if(!instruction[F1])
-                this->opcode = 0;
-            else
-                this->opcode = 1;
-        else
-            if(!instruction[F1])
-                this->opcode = 2;
-            else
-                this->opcode = 3;
-
+        return instruction;
     }
 
-    int8_t ULA::execute()
+    int32_t ULA::execute(std::vector<uint8_t> &op)
     {
-        this->A IAND instruction[ENA];
-        this->A IXOR instruction[INVA];
+       	if(!op[ENA])  this->A = 0;
+        if(op[INVA]) this->A = ~this->A;
 
-        this->B IAND instruction[ENB];
+        if(!op[ENB])  this->B = 0;
 
-        switch(opcode)
-        {
-            case 0: return (this->A AND this->B) XOR instruction[INC];
-            case 1: return (this->A OR  this->B) XOR instruction[INC];
-            case 2: return (this->B XOR 1)       XOR instruction[INC];
-            case 3:
-            {
-                int32_t res = (this->A XOR this->B) XOR instruction[INC];
+        int32_t res;
 
-                // transforma no oposto (1 -> 0, 0 -> 1) e novamente para 1 ou zero. Garante que ao invés de um número como 9 ou 15 ele vai ser 0 ou 1
-                this->carry_out = (A AND B) OR ((A XOR B) AND INC);
-                return res;
-            }
-        }
+        if( !op[F0]  &  !op[F1])  res = this->A AND this->B;
+        if((!op[F0]) &   op[F1])  res = this->A OR  this->B;
+        if(  op[F0]  & (!op[F1])) res = 		   ~this->B;
+        if(  op[F0]  &   op[F1])  res = this->A + this->B;
 
-        return INT8_MIN;
 
+        res += op[INC];
+
+        this->signals.N 		= (res < 0)  ? 1 : 0;
+        this->signals.Z 		= (res == 0) ? 1 : 0;
+        this->signals.carry_out = ((int64_t)(res) >> 32) & 1;
+
+
+
+        this->output = res;
+
+        if(op[SLL8] & op[SRA1]) res = 0xfffffffe;
+        if(op[SLL8]) 			res ILSHIFT 8;
+        if(op[SRA1]) 			res IRSHIFT 1;
+
+
+        return res;
     };

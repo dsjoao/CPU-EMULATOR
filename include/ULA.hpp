@@ -1,31 +1,37 @@
 #pragma once
 #include <cstdint>
 #include <string>
+#include <vector>
 
 
-#define F0 0
-#define F1 1
-#define ENA 2
-#define ENB 3
-#define INVA 4
-#define INC 5
+#define SLL8 0
+#define SRA1 1
+#define F0 2
+#define F1 3
+#define ENA 4
+#define ENB 5
+#define INVA 6
+#define INC 7
 
+struct signal
+{
+    uint16_t N = 0, Z = 0;
+    uint16_t carry_out = 0;
+};
 
 class ULA
 {
-    private:
+    public:
 
-        uint8_t instruction[6];
+        signal signals;
 
         int32_t A = 0, B = 0;
 
-        uint8_t opcode = 0;
+        int32_t output = 0;
 
-        uint16_t carry_out = 0;
+        std::vector<uint8_t> decode(std::string &instruction_buff);
 
-        void decode(std::string &instruction_buff);
-
-        int8_t execute();
+        int32_t execute(std::vector<uint8_t> &instructions);
 
         friend class CPU;
 };

@@ -9,5 +9,5 @@
 #define IAND            &=
 #define IXOR            ^=
 #define IOR             |=
-#define IRSHIFT RSHIFT  >>=
-#define ILSHIFT LSHIFT  <<=
+#define IRSHIFT         >>=
+#define ILSHIFT         <<=
