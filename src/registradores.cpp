@@ -1,23 +1,64 @@
-#include <bits/stdc++.h>
+#include<bits/stdc++.h>
 #include <cstdint>
-#include <vector>
+#include <iostream>
 using namespace std;
-struct SaidaRegist {bool a; bool b;};
 
-/* Ordem dos registradores dentro do vetor registrador:
- * H OPC TOS CPP LV SP PC MDR MAR
- */
-vector<int32_t>registradores(12);
-void barramento_c(vector<bool>regist_ativo, int32_t entrada){
-	for(int i=0; i < 9; i++){
-		if(regist_ativo[i]){
-			registradores[i] = entrada;
-		}
+int32_t h, opc, tos, cpp, lv, sp, pc, mdr, mar, mbr, mbru;
+
+void carrega_regist_barr_c(int i, int32_t entrada){
+	switch (i) {
+		case 0:
+			mar = entrada;
+			break;
+		case 1:
+			mdr = entrada;
+			break;
+		case 2:
+			pc  = entrada;
+			break;
+		case 3:
+			sp  = entrada;
+			break;
+		case 4:
+			lv  = entrada;
+			break;
+		case 5:
+			cpp = entrada;
+			break;
+		case 6:
+			tos = entrada;
+			break;
+		case 7:
+			opc = entrada;
+			break;
+		case 8:
+			h   = entrada;
+			break;
+		default: cout << "ERRO, TENTOU ESCREVER EM UM REGISTRADOR INESISTENTE DO BARRAMENTO C";
 	}
 }
 
-SaidaRegist barramento_b(int saida, const vector<bool> &barr_c){
-
-
-    return {1, 0};
+int32_t carrega_ula_barr_b(int registrador){
+	switch (registrador) {
+		case 0:
+			return  mdr;
+		case 1:
+			return   pc;
+		case 2:
+			return  mbr;
+		case 3:
+			return mbru;
+		case 4:
+			return   sp;
+		case 5:
+			return   lv;
+		case 6:
+			return  cpp;
+		case 7:
+			return  tos;
+		case 8:
+			return  opc;
+		default: cout << "ERRO, NÃO FOI FORNECIDO UM REGISTRADOR VALIDO PARA O BARRAMENTO B";
+	}
+	return 0;
 }
