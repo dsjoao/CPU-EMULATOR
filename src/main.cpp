@@ -3,19 +3,10 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "ula.cpp"
-//#include "cpu.cpp"
-
-bool a=1, b=1;
-
-SaidaUla carrega_ula(const std::string &ir, bool a, bool b){
-    std::vector<int> imput;
-    for(size_t i = 0; i < 8; i++)
-        imput.push_back(ir[i] - '0');
-    return ula(imput[0], imput[1], imput[2], imput[3], imput[4], imput[5], imput[6], imput[7], a, b);
-}
+#include "cpu.cpp"
 
 int main() {
+	std::vector<bool> a,b;
     std::string ir; // registrador de instrução
     int pc = 1;
 
@@ -32,8 +23,8 @@ int main() {
 
     log << "------------------------------------------" << '\n';
     log << "----------------- inicio -----------------" << '\n';
-    log << "a = " << a << '\n';
-    log << "b = " << b << '\n';
+    //log << "a = " << a << '\n';
+    //log << "b = " << b << '\n';
 
     while(getline(entrada,ir)){
         if(!ir.empty() && ir.back() == '\r') ir.pop_back();
@@ -42,8 +33,8 @@ int main() {
         log << "Ciclo: " << pc << '\n' << '\n';
         log << "PC = "   << pc << '\n';
         log << "IR = "   << ir << '\n';
-        log << "a  = "   << a  << '\n';
-        log << "b  = "   << b  << '\n';
+        //log << "a  = "   << a  << '\n';
+        //log << "b  = "   << b  << '\n';
         SaidaUla s = carrega_ula(ir, a, b);
         log << "s  = "   << s.saida << '\n';
         log << "co = "   << s.vaiUm << '\n';
