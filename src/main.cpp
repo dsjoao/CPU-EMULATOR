@@ -67,6 +67,9 @@ int main() {
     log.open("log.txt", ios::out);
     if(!log) // erro, arquivo não existe
         return 1;
+    log << "Joao Pedro Duarte Sa   20250018038" << '\n';
+    log << "Thiago Sales Rodrigues 20250103602" << '\n';
+    log << "Luca Borges            20250103587" << '\n';
     log << "------------------------------------------" << '\n';
     log << "---- Estado inicial dos registradores ----" << '\n';
     imprime_registradores(log, r);

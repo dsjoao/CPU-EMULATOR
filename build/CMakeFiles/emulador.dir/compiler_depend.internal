@@ -24,6 +24,8 @@
 
 CMakeFiles/emulador.dir/src/main.cpp.o
  /home/luca/Projetos/CPU-EMULATOR/src/main.cpp
+ /home/luca/Projetos/CPU-EMULATOR/src/cpu.cpp
+ /home/luca/Projetos/CPU-EMULATOR/src/registradores.cpp
  /home/luca/Projetos/CPU-EMULATOR/src/ula.cpp
  /usr/include/alloca.h
  /usr/include/asm-generic/bitsperlong.h

@@ -22,6 +22,8 @@
   CMakeFiles/emulador.dir/src/main.cpp.o
 
 CMakeFiles/emulador.dir/src/main.cpp.o: /home/luca/Projetos/CPU-EMULATOR/src/main.cpp \
+  /home/luca/Projetos/CPU-EMULATOR/src/cpu.cpp \
+  /home/luca/Projetos/CPU-EMULATOR/src/registradores.cpp \
   /home/luca/Projetos/CPU-EMULATOR/src/ula.cpp \
   /usr/include/alloca.h \
   /usr/include/asm-generic/bitsperlong.h \
@@ -744,12 +746,6 @@ CMakeFiles/emulador.dir/src/main.cpp.o: /home/luca/Projetos/CPU-EMULATOR/src/mai
 
 /usr/include/c++/16/bits/std_thread.h:
 
-/usr/include/c++/16/scoped_allocator:
-
-/usr/include/c++/16/new:
-
-/usr/include/bits/types/wint_t.h:
-
 /usr/include/c++/16/iterator:
 
 /usr/include/bits/types/struct_tm.h:
@@ -876,6 +872,10 @@ CMakeFiles/emulador.dir/src/main.cpp.o: /home/luca/Projetos/CPU-EMULATOR/src/mai
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/libstdc++.so:
 
+/usr/include/c++/16/bits/std_mutex.h:
+
+/usr/include/c++/16/bits/atomic_base.h:
+
 /usr/include/bits/types/siginfo_t.h:
 
 /usr/include/c++/16/bits/memoryfwd.h:
@@ -884,11 +884,23 @@ CMakeFiles/emulador.dir/src/main.cpp.o: /home/luca/Projetos/CPU-EMULATOR/src/mai
 
 /usr/include/bits/pthreadtypes-arch.h:
 
+/usr/include/stdint.h:
+
+/usr/include/endian.h:
+
+/usr/include/c++/16/bits/std_function.h:
+
+/usr/include/c++/16/bits/exception.h:
+
 /usr/include/bits/posix_opt.h:
 
-/usr/include/c++/16/clocale:
+/usr/include/bits/types/timer_t.h:
 
-/usr/include/asm-generic/errno-base.h:
+/usr/include/c++/16/bits/ostream_insert.h:
+
+/usr/include/c++/16/latch:
+
+/usr/include/c++/16/bits/regex.tcc:
 
 /usr/include/c++/16/version:
 
@@ -922,6 +934,8 @@ CMakeFiles/emulador.dir/src/main.cpp.o: /home/luca/Projetos/CPU-EMULATOR/src/mai
 
 /usr/lib/libm.so:
 
+/home/luca/Projetos/CPU-EMULATOR/src/cpu.cpp:
+
 /usr/include/sys/single_threaded.h:
 
 /usr/include/c++/16/atomic:
@@ -934,6 +948,10 @@ CMakeFiles/emulador.dir/src/main.cpp.o: /home/luca/Projetos/CPU-EMULATOR/src/mai
 
 /usr/lib/libmvec.so.1:
 
+/home/luca/Projetos/CPU-EMULATOR/src/registradores.cpp:
+
+/usr/include/c++/16/bits/regex_scanner.h:
+
 /usr/lib/ld-linux-x86-64.so.2:
 
 /usr/include/c++/16/bits/quoted_string.h:
@@ -945,10 +963,6 @@ CMakeFiles/emulador.dir/src/main.cpp.o: /home/luca/Projetos/CPU-EMULATOR/src/mai
 /usr/include/uchar.h:
 
 /usr/include/bits/pthread_stack_min-dynamic.h:
-
-/usr/include/bits/types/timer_t.h:
-
-/usr/include/c++/16/bits/ostream_insert.h:
 
 /usr/include/bits/types/sigevent_t.h:
 
@@ -969,18 +983,6 @@ CMakeFiles/emulador.dir/src/main.cpp.o: /home/luca/Projetos/CPU-EMULATOR/src/mai
 /usr/include/bits/types/sig_atomic_t.h:
 
 /usr/include/bits/typesizes.h:
-
-/usr/include/c++/16/semaphore:
-
-/usr/include/asm/bitsperlong.h:
-
-/usr/include/c++/16/tr1/modified_bessel_func.tcc:
-
-/usr/include/c++/16/condition_variable:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s.so:
-
-/usr/include/asm/types.h:
 
 /usr/include/bits/types/time_t.h:
 
@@ -1006,6 +1008,10 @@ CMakeFiles/emulador.dir/src/main.cpp.o: /home/luca/Projetos/CPU-EMULATOR/src/mai
 
 /usr/include/c++/16/bits/ios_base.h:
 
+/usr/include/c++/16/bits/vector.tcc:
+
+/usr/include/bits/floatn.h:
+
 /usr/lib/libgcc_s.so.1:
 
 /usr/include/c++/16/bits/memory_resource.h:
@@ -1018,13 +1024,17 @@ CMakeFiles/emulador.dir/src/main.cpp.o: /home/luca/Projetos/CPU-EMULATOR/src/mai
 
 /usr/include/c++/16/bits/regex_compiler.h:
 
+/usr/include/c++/16/clocale:
+
+/usr/include/asm-generic/errno-base.h:
+
 /usr/include/c++/16/debug/debug.h:
 
 /usr/include/c++/16/bits/stl_bvector.h:
 
-/usr/include/asm-generic/types.h:
-
 /usr/include/asm-generic/bitsperlong.h:
+
+/usr/include/asm-generic/types.h:
 
 /usr/include/bits/mathcalls-macros.h:
 
@@ -1110,6 +1120,24 @@ CMakeFiles/emulador.dir/src/main.cpp.o:
 
 /usr/include/asm/posix_types.h:
 
+/usr/include/c++/16/scoped_allocator:
+
+/usr/include/c++/16/new:
+
+/usr/include/bits/types/wint_t.h:
+
+/usr/include/c++/16/tr1/modified_bessel_func.tcc:
+
+/usr/include/c++/16/condition_variable:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s.so:
+
+/usr/include/asm/types.h:
+
+/usr/include/c++/16/semaphore:
+
+/usr/include/asm/bitsperlong.h:
+
 /usr/include/bits/stdint-intn.h:
 
 /usr/include/bits/types/clockid_t.h:
@@ -1137,14 +1165,6 @@ CMakeFiles/emulador.dir/src/main.cpp.o:
 /usr/include/bits/types/__sigval_t.h:
 
 /usr/include/c++/16/bits/concept_check.h:
-
-/usr/include/stdint.h:
-
-/usr/include/endian.h:
-
-/usr/include/c++/16/bits/exception.h:
-
-/usr/include/c++/16/bits/std_function.h:
 
 /usr/include/bits/timesize.h:
 
@@ -1186,19 +1206,11 @@ CMakeFiles/emulador.dir/src/main.cpp.o:
 
 /usr/include/bits/floatn-common.h:
 
-/usr/include/c++/16/bits/vector.tcc:
-
-/usr/include/bits/floatn.h:
-
 /usr/include/bits/long-double.h:
 
 /usr/include/bits/siginfo-consts.h:
 
 /usr/include/bits/libc-header-start.h:
-
-/usr/include/c++/16/latch:
-
-/usr/include/c++/16/bits/regex.tcc:
 
 /usr/include/bits/uintn-identity.h:
 
@@ -1442,8 +1454,6 @@ CMakeFiles/emulador.dir/src/main.cpp.o:
 
 /usr/include/c++/16/bits/regex_executor.tcc:
 
-/usr/include/c++/16/bits/regex_scanner.h:
-
 /usr/include/math.h:
 
 /usr/include/c++/16/bits/regex_scanner.tcc:
@@ -1463,7 +1473,3 @@ CMakeFiles/emulador.dir/src/main.cpp.o:
 /usr/include/c++/16/bits/specfun.h:
 
 /usr/include/c++/16/bits/sstream.tcc:
-
-/usr/include/c++/16/bits/atomic_base.h:
-
-/usr/include/c++/16/bits/std_mutex.h:

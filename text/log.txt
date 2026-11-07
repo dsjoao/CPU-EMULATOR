@@ -1,3 +1,6 @@
+Joao Pedro Duarte Sa   20250018038
+Thiago Sales Rodrigues 20250103602
+Luca Borges            20250103587
 ------------------------------------------
 ---- Estado inicial dos registradores ----
 mar = 00000000000000000000000000000000
