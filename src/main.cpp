@@ -78,7 +78,7 @@ int main() {
     log << "----------------- inicio -----------------" << '\n';
     while(getline(entrada,ir)){
         if(!ir.empty() && ir.back() == '\r') ir.pop_back();
-        if(ir.size() != 21) break;
+        if(ir.size() != 23) break;
         vector<int32_t> comandos = entrada_to_comandos(ir);
 
         log << "Ciclo: " << ciclo << '\n';
