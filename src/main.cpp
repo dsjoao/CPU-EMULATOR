@@ -73,9 +73,9 @@ int main() {
 
     // --- abrindo os arquivos ---
     ifstream entrada("../text/microinstrucoes.txt");
-    fstream  log	("log.txt");
+    ofstream  log	("log.txt");  // ofstream cria automaticamente arquivos de escrita
     fstream  dados	("dados.txt");
-    assert(entrada && log); // erro, arquivo(s) não existe(m)
+    assert(entrada && log); // assert = "garanta que", se a condição não for verdade o programa para
 
 // 				------------ nomes ------------
     log << "Joao Pedro Duarte Sa:   20250018038" << '\n';
