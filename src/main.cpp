@@ -4,6 +4,7 @@
 #include <ostream>
 #include <string>
 #include <vector>
+#include <cassert>
 #include "cpu.cpp"
 using namespace std;
 
@@ -71,47 +72,67 @@ int main() {
 
 
     // --- abrindo os arquivos ---
-    ifstream entrada;
-    fstream      log;
-    fstream    dados;
-    entrada.open("../text/microinstrucoes.txt");
-    log.open              ("log.txt", ios::out);
-    dados.open("dados.txt", ios::out | ios::in);
-    if(!entrada || !log) // erro, arquivo não existe
-        return 1;
+    ifstream entrada("../text/microinstrucoes.txt");
+    fstream  log	("log.txt");
+    fstream  dados	("dados.txt");
+    assert(entrada && log); // erro, arquivo(s) não existe(m)
+
+// 				------------ nomes ------------
     log << "Joao Pedro Duarte Sa:   20250018038" << '\n';
     log << "Thiago Sales Rodrigues: 20250103602" << '\n';
     log << "Luca Borges:            20250103587" << '\n';
+
+// 		------------------ conteúdo prévio --------------------
     log << "------------------------------------------" << '\n';
     log << "-------- Estado inicial da memória -------" << '\n';
-    imprime_dados    (log, dados);
+
+    imprime_dados(log, dados);
+
     log << "------------------------------------------" << '\n';
     log << "---- Estado inicial dos registradores ----" << '\n';
+
     imprime_registradores(log, r);
+
+//  ------------------ início do programa -------------------
     log << "------------------------------------------" << '\n';
     log << "----------------- inicio -----------------" << '\n';
+
     while(getline(entrada,ir)){
         if(!ir.empty() && ir.back() == '\r') ir.pop_back();
-        if(ir.size() != 23) break;
+        assert(ir.size() == 23);
+
         vector<bitset<32>> comandos = entrada_to_comandos(ir);
 
         log << "Ciclo: " << ciclo << '\n';
         log << "IR = "   << ir   << '\n' << '\n';
+
         imprime_barramentos(log, comandos[3].to_ulong(), comandos[1].to_ulong());
+
         log << "------------------------------------------" << '\n';
         log << "-> Registradores antes da instrução:"       << '\n';
+
         imprime_registradores(log, r);
+
         log << "---------------------" << '\n';
+
         a = r.h;
         b = barramento_b(r, comandos[3]);
+
         SaidaUla s = carrega_ula(comandos[0], a, b);
+
         barramento_c(r, comandos[1], s.saidad);
+
         log << "-> Registradores depois da instrução:"       << '\n';
+
         imprime_registradores(log, r);
+
         log << "------------------------------------------" << '\n';
+
         mem(r, dados, comandos[2]);
         ciclo++;
     }
+// 			------------ fim do programa ------------------
+
 
     entrada.close();
     log.close();

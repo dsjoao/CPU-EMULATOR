@@ -8,8 +8,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/luca/Projetos/CPU-EMULATOR/src/main.cpp" "CMakeFiles/emulador.dir/src/main.cpp.o" "gcc" "CMakeFiles/emulador.dir/src/main.cpp.o.d"
-  "" "/home/luca/Projetos/CPU-EMULATOR/text/emulador" "gcc" "CMakeFiles/emulador.dir/link.d"
+  "/home/dsjoao/Projects/emulador_cpu/CPU-EMULATOR/src/main.cpp" "CMakeFiles/emulador.dir/src/main.cpp.o" "gcc" "CMakeFiles/emulador.dir/src/main.cpp.o.d"
+  "" "/home/dsjoao/Projects/emulador_cpu/CPU-EMULATOR/text/emulador" "gcc" "CMakeFiles/emulador.dir/link.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

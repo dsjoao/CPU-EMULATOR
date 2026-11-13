@@ -1,5 +1,6 @@
 CMakeFiles/emulador.dir/src/main.cpp.o: \
- /home/luca/Projetos/CPU-EMULATOR/src/main.cpp /usr/include/stdc-predef.h \
+ /home/dsjoao/Projects/emulador_cpu/CPU-EMULATOR/src/main.cpp \
+ /usr/include/stdc-predef.h \
  /usr/include/c++/16/x86_64-pc-linux-gnu/bits/stdc++.h \
  /usr/include/c++/16/cctype \
  /usr/include/c++/16/x86_64-pc-linux-gnu/bits/c++config.h \
@@ -312,6 +313,6 @@ CMakeFiles/emulador.dir/src/main.cpp.o: \
  /usr/include/c++/16/bits/fs_dir.h /usr/include/c++/16/bits/fs_ops.h \
  /usr/include/c++/16/memory_resource /usr/include/c++/16/barrier \
  /usr/include/c++/16/latch /usr/include/c++/16/syncstream \
- /home/luca/Projetos/CPU-EMULATOR/src/cpu.cpp \
- /home/luca/Projetos/CPU-EMULATOR/src/ula.cpp \
- /home/luca/Projetos/CPU-EMULATOR/src/registradores.cpp
+ /home/dsjoao/Projects/emulador_cpu/CPU-EMULATOR/src/cpu.cpp \
+ /home/dsjoao/Projects/emulador_cpu/CPU-EMULATOR/src/ula.cpp \
+ /home/dsjoao/Projects/emulador_cpu/CPU-EMULATOR/src/registradores.cpp

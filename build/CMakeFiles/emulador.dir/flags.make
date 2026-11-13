@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/luca/Projetos/CPU-EMULATOR/include
+CXX_INCLUDES = -I/home/dsjoao/Projects/emulador_cpu/CPU-EMULATOR/include
 
-CXX_FLAGS = -std=c++20
+CXX_FLAGS = -std=c++20 -g -O0
 

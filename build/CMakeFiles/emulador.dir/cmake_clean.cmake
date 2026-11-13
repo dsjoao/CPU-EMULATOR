@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/emulador.dir/link.d"
-  "/home/luca/Projetos/CPU-EMULATOR/text/emulador"
-  "/home/luca/Projetos/CPU-EMULATOR/text/emulador.pdb"
+  "/home/dsjoao/Projects/emulador_cpu/CPU-EMULATOR/text/emulador"
+  "/home/dsjoao/Projects/emulador_cpu/CPU-EMULATOR/text/emulador.pdb"
   "CMakeFiles/emulador.dir/src/main.cpp.o"
   "CMakeFiles/emulador.dir/src/main.cpp.o.d"
 )
