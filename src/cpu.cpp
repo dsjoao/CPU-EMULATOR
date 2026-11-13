@@ -58,7 +58,8 @@ void escreve_dados(fstream &dados, const string &nome, const vector<bitset<32>> 
  * @return vector<bitset<32>> com cada um dos dados da entrada padrão:
  * saida[0] = O que a ula vai fazer
  * saida[1] = quais registradores do barr c serão sobre escritos
- * saida[2] = qual registrador vai fornecer os dados para o barr b
+ * saida[2] = que operação vai ser feita na memória
+ * saida[3] = qual registrador vai fornecer os dados para o barr b
  */
 vector<bitset<32>> entrada_to_comandos(const string &ir){
     vector<bitset<32>> saida(4);
@@ -96,12 +97,13 @@ void barramento_c(Reg &r, bitset<32> registradores, bitset<32> entrada){
  * @brief Executa as operações de leitura/escrita na memória na posição do reg MAR
  * @param Reg &r         -> o "vetor" de registradores em que os dados serão armazenados/lidos
  * @param fstream &dados -> o arquivo que serve como memória de dados do sitema
+ * @param bitset<32> entrada -> qual bit de memoria esta ativo (3° instrução)
  */
 void mem(Reg &r, fstream &dados, bitset<32> entrada){
 	vector<bitset<32>>linhas = le_dados(dados);
 	unsigned long mar = r.mar.to_ulong();
 	if(mar>8){
-		cout << "MAR MT GRANDE, ALGO TA ERRADO NOS CALCULOS DO R.MAR";
+		cout << "MAR MUITO GRANDE, ALGO TA ERRADO NOS CALCULOS DO R.MAR";
 		return;
 	}
 	if(entrada.test(0))
