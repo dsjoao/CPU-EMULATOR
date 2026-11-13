@@ -1,6 +1,7 @@
 #include<bits/stdc++.h>
 #include <fstream>
 #include <iostream>
+#include <ostream>
 #include <string>
 #include <vector>
 #include "cpu.cpp"
@@ -28,16 +29,25 @@ void imprime_barramentos(ostream &out, int b, int c){
 }
 
 void imprime_registradores(ostream &out, const Reg &r){
-	out << "mar = " << bitset<32>(r.mar) << '\n';
-	out << "mdr = " << bitset<32>(r.mdr) << '\n';
-	out << "pc  = " << bitset<32>(r.pc)  << '\n';
-	out << "mbr = " << bitset<8>(r.mbr)  << '\n';
-	out << "sp  = " << bitset<32>(r.sp)  << '\n';
-	out << "lv  = " << bitset<32>(r.lv)  << '\n';
-	out << "cpp = " << bitset<32>(r.cpp) << '\n';
-	out << "tos = " << bitset<32>(r.tos) << '\n';
-	out << "opc = " << bitset<32>(r.opc) << '\n';
-	out << "h   = " << bitset<32>(r.h)   << '\n';
+	out << "mar = " << r.mar << '\n';
+	out << "mdr = " << r.mdr << '\n';
+	out << "pc  = " << r.pc  << '\n';
+	out << "mbr = " << r.mbr << '\n';
+	out << "sp  = " << r.sp  << '\n';
+	out << "lv  = " << r.lv  << '\n';
+	out << "cpp = " << r.cpp << '\n';
+	out << "tos = " << r.tos << '\n';
+	out << "opc = " << r.opc << '\n';
+	out << "h   = " << r.h   << '\n';
+}
+
+void imprime_dados(ostream &out, const fstream &dados){
+	if(!out || !dados)
+		return;
+	string linha;
+	while(getline(dados, linha)){
+
+	}
 }
 
 
@@ -46,30 +56,30 @@ int main() {
 	int32_t a=0, b=0;
     string  ir; // registrador de instrução
     Reg     r;
-    r.mar = 0b00000000000000000000000000000000;
-    r.mdr = 0b00000000000000000000000000000000;
-    r.pc  = 0b00000000000000000000000000000000;
-    r.mbr = 0b10000001;
-    r.sp  = 0b00000000000000000000000000000000;
-    r.lv  = 0b00000000000000000000000000000000;
-    r.cpp = 0b00000000000000000000000000000000;
-    r.tos = 0b00000000000000000000000000000010;
-    r.opc = 0b00000000000000000000000000000000;
-    r.h   = 0b00000000000000000000000000000001;
+    r.mar = 00000000000000000000000000000000;
+    r.mdr = 00000000000000000000000000000000;
+    r.pc  = 00000000000000000000000000000000;
+    r.mbr =                         00000000;
+    r.sp  = 00000000000000000000000000000111;
+    r.lv  = 00000000000000000000000000000010;
+    r.cpp = 00000000000000000000000000000000;
+    r.tos = 00000000000000000000000000100000;
+    r.opc = 00000000000000000000000000000000;
+    r.h   = 00000000000000000000000000000000;
 
 
     // --- abrindo os arquivos ---
     ifstream entrada;
-    entrada.open("../text/programa_etapa2_tarefa2.txt");
-    if(!entrada) // erro, arquivo não existe
-        return 1;
     fstream log;
+    fstream dados;
+    entrada.open("../text/microinstrucoes.txt");
     log.open("log.txt", ios::out);
-    if(!log) // erro, arquivo não existe
+    dados.open("dados.txt", ios::out | ios::in);
+    if(!entrada || !log) // erro, arquivo não existe
         return 1;
-    log << "Joao Pedro Duarte Sa   20250018038" << '\n';
-    log << "Thiago Sales Rodrigues 20250103602" << '\n';
-    log << "Luca Borges            20250103587" << '\n';
+    log << "Joao Pedro Duarte Sa:   20250018038" << '\n';
+    log << "Thiago Sales Rodrigues: 20250103602" << '\n';
+    log << "Luca Borges:            20250103587" << '\n';
     log << "------------------------------------------" << '\n';
     log << "---- Estado inicial dos registradores ----" << '\n';
     imprime_registradores(log, r);
