@@ -1,23 +1,21 @@
 #include<bits/stdc++.h>
-#include <cstdint>
-struct SaidaUla {int32_t saida; int32_t saidad; bool vaiUm; bool n; bool z;};
+using namespace std;
 
-SaidaUla ula(bool sll8, bool sra1, bool f0, bool f1, bool ena, bool enb, bool inva, bool vemUm, int32_t a, int32_t b){
+struct SaidaUla {bitset<32> saida; bitset<32> saidad; bool vaiUm; bool n; bool z;};
+
+SaidaUla ula(bool sll8, bool sra1, bool f0, bool f1, bool ena, bool enb, bool inva, bool vemUm, bitset<32> a, bitset<32> b){
     // --- definindo váriaveis ---
-    int32_t saida, saidad;
-    bool  vaiUm, n=0, z=0;
-    bool    carry = vemUm;
-    uint32_t   result = 0;
+    bitset<32> saida, saidad;
+    bool     vaiUm, n=0, z=0;
+    bool       carry = vemUm;
+    bitset<32>    result = 0;
     // ----------------------------
     for(int i=0; i < 32; i++){
-    	// --- a,b no indice i ---
-     	bool a_i = ((uint32_t)a >> i) & 1;
-      	bool b_i = ((uint32_t)b >> i) & 1;
        	// ----------------------------
         // --- primeiras entradas ---
-        bool e3 =   b_i and enb;
-        bool e2 =   a_i and ena;
-        bool e1 =  inva xor  e2;
+        bool e3 = b.test(i) and enb;
+        bool e2 = a.test(i) and ena;
+        bool e1 =      inva xor  e2;
         // ----------------------------
         // --- decodificador ---
         bool d1 = !f0 and !f1;
@@ -42,24 +40,24 @@ SaidaUla ula(bool sll8, bool sra1, bool f0, bool f1, bool ena, bool enb, bool in
         // ----------------------------
         // --- resultado/carry ---
         bool bit = ul3 or ul4 or ul5 or s5;
-        result   |=   (uint32_t) bit <<  i;
-        carry    =                      s6;
+        carry    =      s6;
+        result.set(i, bit);
         // ----------------------------
     }
     // --- saidas ---
-    vaiUm =            carry;
-    saida = (int32_t) result;
-    if(saida == 0)
-        z = 1;
-    else if(saida < 0)
-        n = 1;
+    vaiUm =          carry;
+    saida =         result;
+    z     =   saida.none();
+    n     = saida.test(31);
     // ----------------------------
     // --- deslocamento lógico ---
     saidad = saida;
     if(sll8)
-        saidad = (int32_t)((uint32_t)saida << 8);
-    else if(sra1)
+        saidad = (saida << 8);
+    else if(sra1){
         saidad = (saida >> 1);
+        saidad[31] = saida[31];
+    }
     // ----------------------------
     return {saida, saidad, vaiUm, n, z};
 }
