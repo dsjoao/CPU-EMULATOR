@@ -59,23 +59,22 @@ int main() {
 	bitset<32> a=0, b=0;
     string  ir; // registrador de instrução
     Reg     r;
-    r.mar = 00000000000000000000000000000000;
-    r.mdr = 00000000000000000000000000000000;
-    r.pc  = 00000000000000000000000000000000;
-    r.mbr =                         00000000;
-    r.sp  = 00000000000000000000000000000111;
-    r.lv  = 00000000000000000000000000000010;
-    r.cpp = 00000000000000000000000000000000;
-    r.tos = 00000000000000000000000000100000;
-    r.opc = 00000000000000000000000000000000;
-    r.h   = 00000000000000000000000000000000;
-
+    r.mar = 0b100;
+    r.mdr = 0;
+    r.pc  = 0;
+    r.mbr = 0;
+    r.sp  = 0b100;
+    r.lv  = 0;
+    r.cpp = 0;
+    r.tos = 0;
+    r.opc = 0;
+    r.h   = 0;
 
     // --- abrindo os arquivos ---
     ifstream entrada("../text/microinstrucoes.txt");
     ofstream  log	("log.txt");  // ofstream cria automaticamente arquivos de escrita
     fstream  dados	("dados.txt");
-    assert(entrada && log); // assert = "garanta que", se a condição não for verdade o programa para
+    assert(entrada && log && dados); // assert = "garanta que", se a condição não for verdade o programa para
 
 // 				------------ nomes ------------
     log << "Joao Pedro Duarte Sa:   20250018038" << '\n';
@@ -122,13 +121,15 @@ int main() {
 
         barramento_c(r, comandos[1], s.saidad);
 
+        mem(r, dados, comandos[2]);
+
         log << "-> Registradores depois da instrução:"       << '\n';
 
         imprime_registradores(log, r);
 
         log << "------------------------------------------" << '\n';
 
-        mem(r, dados, comandos[2]);
+
         ciclo++;
     }
 // 			------------ fim do programa ------------------

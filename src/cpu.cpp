@@ -17,14 +17,14 @@ bitset<32> traducao(const string &str){
  * @return vector<bitset<32>> -> vetor com cada bitset<32> sendo uma linha
  */
 vector<bitset<32>> le_dados(fstream &dados){
-	vector<bitset<32>> linhas(10);
+	vector<bitset<32>> linhas(16);
 	string temp;
 	int i=0;
 	if(!dados.is_open()){
 		cout << "ERRO AO TENTAR LER OS DADOS DA MEMORIA\n";
 		return linhas;
 	}
-	while(i < 10 && getline(dados, temp)){
+	while(i < 16 && getline(dados, temp)){
 		if(temp.empty()) continue;
 		linhas[i] = traducao(temp);
 		i++;
@@ -40,18 +40,14 @@ vector<bitset<32>> le_dados(fstream &dados){
  * @param const string &nome -> nome do arquivo, ex "dados.txt"
  * @param const vector<bitset<32>> -> vetor com os dados que serão escritos
  */
-void escreve_dados(fstream &dados, const string &nome, const vector<bitset<32>> linhas){
-	if(!dados.is_open()){
-		cout << "ERRO AO TENTAR ESCREVER OS DADOS DA MEMORIA\n";
-		return;
-	}
-	if(dados.is_open()) dados.close();
+void escreve_dados(fstream &dados, const string &nome, const vector<bitset<32>> &linhas){
+	dados.close();
 	dados.clear();
 	dados.open(nome, ios::out | ios::trunc);
-	for(bitset<32> valor : linhas)
-		dados << valor << '\n';
+	for (const auto &valor : linhas) dados << valor << '\n';
+	dados.close();
+	dados.open(nome, ios::in | ios::out);   // reabre e começa na posição 0
 }
-
 /*
  * @brief divide uma string geral entre seus dados relevantes
  * @param ir string de bits de entrada (21 bits)
@@ -102,7 +98,7 @@ void barramento_c(Reg &r, bitset<32> registradores, bitset<32> entrada){
 void mem(Reg &r, fstream &dados, bitset<32> entrada){
 	vector<bitset<32>>linhas = le_dados(dados);
 	unsigned long mar = r.mar.to_ulong();
-	if(mar>8){
+	if(mar>15){
 		cout << "MAR MUITO GRANDE, ALGO TA ERRADO NOS CALCULOS DO R.MAR";
 		return;
 	}
