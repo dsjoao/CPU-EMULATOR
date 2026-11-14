@@ -10,7 +10,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/../text)
 
 add_executable(emulador src/main.cpp)
 
-target_include_directories(emulador PRIVATE include)
 target_compile_options(emulador PRIVATE -g
 -O0
 )

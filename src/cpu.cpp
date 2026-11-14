@@ -95,18 +95,18 @@ void barramento_c(Reg &r, bitset<32> registradores, bitset<32> entrada){
  * @param fstream &dados -> o arquivo que serve como memória de dados do sitema
  * @param bitset<32> entrada -> qual bit de memoria esta ativo (3° instrução)
  */
-void mem(Reg &r, fstream &dados, bitset<32> entrada){
-	vector<bitset<32>>linhas = le_dados(dados);
+bool mem(Reg &r, fstream &dados, const string &nome, bitset<32> entrada){
+	if(entrada.none()) return true;
 	unsigned long mar = r.mar.to_ulong();
-	if(mar>15){
-		cout << "MAR MUITO GRANDE, ALGO TA ERRADO NOS CALCULOS DO R.MAR";
-		return;
-	}
-	if(entrada.test(0))
+	if(mar>15) return false;
+	vector<bitset<32>>linhas = le_dados(dados);
+	if(entrada.test(0)){
 		r.mdr = linhas[mar];
-	else if(entrada.test(1))
-		linhas[mar] = r.mdr;
-	escreve_dados(dados, "dados.txt", linhas);
+		return true;
+	}
+	linhas[mar] = r.mdr;
+	escreve_dados(dados, nome, linhas);
+	return true;
 }
 
 // -----------------------------------------------------------------------
@@ -120,4 +120,109 @@ bitset<32> barramento_b(Reg r, bitset<32> registrador){
 	unsigned long reg = registrador.to_ulong();
 	bitset<32> entrada = le_barr_b(r, reg);
 	return  entrada;
+}
+
+const char* NOME_B[9] = {"mdr","pc","mbr","mbru","sp","lv","cpp","tos","opc"};
+const char* NOME_C[9] = {"mar","mdr","pc","sp","lv","cpp","tos","opc","h"};
+
+void imprime_barramentos(ostream &out, unsigned long b, unsigned long c){
+	out << "Barramento B = ";
+	if(b <= 8) out << NOME_B[b];
+	else       out << "nenhum";      // códigos 9 a 15
+	out << '\n';
+
+	out << "Barramento C = ";
+	bool primeiro = true;
+	for(int i = 8; i >= 0; i--){
+		if((c >> i) & 1){
+			if(!primeiro) out << ", ";
+			out << NOME_C[i];
+			primeiro = false;
+		}
+	}
+	if(primeiro) out << "nenhum";
+	out << '\n';
+}
+
+void imprime_registradores(ostream &out, const Reg &r){
+	out << "mar = " << r.mar << '\n';
+	out << "mdr = " << r.mdr << '\n';
+	out << "pc = "  << r.pc  << '\n';
+	out << "mbr = " << r.mbr << '\n';
+	out << "sp = "  << r.sp  << '\n';
+	out << "lv = "  << r.lv  << '\n';
+	out << "cpp = " << r.cpp << '\n';
+	out << "tos = " << r.tos << '\n';
+	out << "opc = " << r.opc << '\n';
+	out << "h = "   << r.h   << '\n';
+}
+
+void imprime_dados(ostream &log, fstream &dados){
+	if(!log || !dados.is_open())
+		return;
+	dados.clear();
+	dados.seekg(0);
+	string linha;
+	while(getline(dados, linha)){
+		log << linha << '\n';
+	}
+	dados.clear();  // limpa eofbit e failbit
+	dados.seekg(0); // volta para o inicio do arquivo
+}
+
+
+bool executa_microinstrucao(Reg &r, fstream &dados, const string &nome, const string &ir, ostream &log, int &ciclo){
+	log << "Ciclo: " << ciclo << '\n';
+	ciclo++;
+
+	if(ir.size() != 23 || ir.find_first_not_of("01") != string::npos){
+		log << "> Erro, microinstrucao invalida: " << ir << '\n';
+		log << "------------------------------------------" << '\n';
+		return false;
+	}
+
+	log << "IR = " << ir.substr(0,8) << ' ' << ir.substr(8,9) << ' '
+	    << ir.substr(17,2) << ' ' << ir.substr(19,4) << '\n' << '\n';
+
+	vector<bitset<32>> comandos = entrada_to_comandos(ir);
+	bool fetch = comandos[2].test(0) && comandos[2].test(1);
+
+	if(!fetch && comandos[0].test(7) && comandos[0].test(6)){
+		log << "> Erro, sinais de controle invalidos (SLL8 e SRA1 ativos)." << '\n';
+		log << "------------------------------------------" << '\n';
+		return false;
+	}
+
+	if(fetch){
+		imprime_barramentos(log, 15, 0);
+		log << "Fetch: MBR = " << ir.substr(0,8) << ", H = MBR (sem passar pela ULA)" << '\n';
+	}
+	else
+		imprime_barramentos(log, comandos[3].to_ulong(), comandos[1].to_ulong());
+
+	log << "------------------------------------------" << '\n';
+	log << "-> Registradores antes da microinstrução:"       << '\n';
+	imprime_registradores(log, r);
+	log << "---------------------" << '\n';
+
+	bool ok = true;
+	if(fetch){
+		r.mbr = bitset<8>(ir.substr(0,8));
+		r.h   = bitset<32>(r.mbr.to_ulong());
+	}
+	else{
+		bitset<32> a = r.h;
+		bitset<32> b = barramento_b(r, comandos[3]);
+		SaidaUla s = carrega_ula(comandos[0], a, b);
+		barramento_c(r, comandos[1], s.saidad);
+		if(!mem(r, dados, nome, comandos[2])){
+			log << "> Erro, MAR fora da memoria (" << r.mar.to_ulong() << "), acesso ignorado." << '\n';
+			ok = false;
+		}
+	}
+
+	log << "-> Registradores depois da microinstrução:" << '\n';
+	imprime_registradores(log, r);
+	log << "------------------------------------------" << '\n';
+	return ok;
 }

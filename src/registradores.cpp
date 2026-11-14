@@ -52,7 +52,7 @@ bitset<32> le_barr_b(Reg r, unsigned long registrador){
 		case 6: return r.cpp;
 		case 7: return r.tos;
 		case 8: return r.opc;
-		default: cout << "ERRO, NÃO FOI FORNECIDO UM REGISTRADOR VALIDO PARA O BARRAMENTO B";
+		default: break;
 	}
 	return 0;
 }

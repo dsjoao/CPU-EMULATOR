@@ -1,3 +1,4 @@
+
 #include<bits/stdc++.h>
 #include <fstream>
 #include <iostream>
@@ -5,58 +6,11 @@
 #include <string>
 #include <vector>
 #include <cassert>
-#include "cpu.cpp"
+#include "instrucoes.cpp"
 using namespace std;
-
-const char* NOME_B[9] = {"mdr","pc","mbr","mbru","sp","lv","cpp","tos","opc"};
-const char* NOME_C[9] = {"mar","mdr","pc","sp","lv","cpp","tos","opc","h"};
-
-void imprime_barramentos(ostream &out, unsigned long b, unsigned long c){
-	out << "barramento B = ";
-	if(b <= 8) out << NOME_B[b];
-	else       out << "nenhum";      // códigos 9 a 15
-	out << '\n';
-
-	out << "Barramento C = ";
-	bool primeiro = true;
-	for(int i = 8; i >= 0; i--){
-		if((c >> i) & 1){
-			if(!primeiro) out << ", ";
-			out << NOME_C[i];
-			primeiro = false;
-		}
-	}
-	out << '\n';
-}
-
-void imprime_registradores(ostream &out, const Reg &r){
-	out << "mar = " << r.mar << '\n';
-	out << "mdr = " << r.mdr << '\n';
-	out << "pc  = " << r.pc  << '\n';
-	out << "mbr = " << r.mbr << '\n';
-	out << "sp  = " << r.sp  << '\n';
-	out << "lv  = " << r.lv  << '\n';
-	out << "cpp = " << r.cpp << '\n';
-	out << "tos = " << r.tos << '\n';
-	out << "opc = " << r.opc << '\n';
-	out << "h   = " << r.h   << '\n';
-}
-
-void imprime_dados(ostream &log, fstream &dados){
-	if(!log || !dados)
-		return;
-	string linha;
-	while(getline(dados, linha)){
-		log << linha << '\n';
-	}
-	dados.clear();  // limpa eofbit e failbit
-	dados.seekg(0); // volta para o inicio do arquivo
-}
-
 
 int main() {
 	int     ciclo = 1;
-	bitset<32> a=0, b=0;
     string  ir; // registrador de instrução
     Reg     r;
     r.mar = 0b100;
@@ -70,10 +24,40 @@ int main() {
     r.opc = 0;
     r.h   = 0;
 
+    Instrucao ILOAD;
+    ILOAD.nome = "ILOAD";
+    ILOAD.tem_argumento = true;
+    ILOAD.microinstrucoes = {
+        "00110100100000000000101",
+        "00111001100000000001111",
+        "00111000000000001011111",
+        "00110101000001001100100",
+        "00110100001000000000000"
+    };
+    ILOAD.repetida = 1;
+
+    Instrucao DUP;
+    DUP.nome = "DUP";
+    DUP.tem_argumento = false;
+    DUP.microinstrucoes = {
+        "00110101000001001000100",
+        "00110100000000010100111"
+    };
+
+    Instrucao BIPUSH;
+    BIPUSH.nome = "BIPUSH";
+    BIPUSH.tem_argumento = true;
+    BIPUSH.microinstrucoes = {
+        "00110101000001001000100",
+        "xxxxxxxx000000000110000",
+        "00111000001000010101111"
+    };
+
     // --- abrindo os arquivos ---
-    ifstream entrada("../text/microinstrucoes.txt");
+    ifstream entrada("instruções.txt");
     ofstream  log	("log.txt");  // ofstream cria automaticamente arquivos de escrita
-    fstream  dados	("dados.txt");
+    string NOME_DADOS = "dados.txt";
+    fstream  dados	(NOME_DADOS);
     assert(entrada && log && dados); // assert = "garanta que", se a condição não for verdade o programa para
 
 // 				------------ nomes ------------
@@ -98,44 +82,43 @@ int main() {
 
     while(getline(entrada,ir)){
         if(!ir.empty() && ir.back() == '\r') ir.pop_back();
-        assert(ir.size() == 23);
+        if(ir.find_first_not_of(" \t") == string::npos) continue;
 
-        vector<bitset<32>> comandos = entrada_to_comandos(ir);
+        istringstream in(ir);
+        string nome, arg, sobra;
+        in >> nome >> arg >> sobra;
+        for(char &ch : nome) ch = toupper((unsigned char)ch);
 
-        log << "Ciclo: " << ciclo << '\n';
-        log << "IR = "   << ir   << '\n' << '\n';
+        const Instrucao *atual = nullptr;
+        if(nome == ILOAD.nome)       atual = &ILOAD;
+        else if(nome == DUP.nome)    atual = &DUP;
+        else if(nome == BIPUSH.nome) atual = &BIPUSH;
 
-        imprime_barramentos(log, comandos[3].to_ulong(), comandos[1].to_ulong());
+        string erro;
+        unsigned long argumento = 0;
+        if(atual == nullptr)
+            erro = "instrucao desconhecida";
+        else if(!sobra.empty())
+            erro = "argumentos demais";
+        else
+            le_argumento(*atual, arg, argumento, erro);
 
-        log << "------------------------------------------" << '\n';
-        log << "-> Registradores antes da instrução:"       << '\n';
+        if(!erro.empty()){
+            log << "==========================================" << '\n';
+            log << "> Erro na linha \"" << ir << "\": " << erro << '\n';
+            log << "==========================================" << '\n';
+            continue;
+        }
 
-        imprime_registradores(log, r);
-
-        log << "---------------------" << '\n';
-
-        a = r.h;
-        b = barramento_b(r, comandos[3]);
-
-        SaidaUla s = carrega_ula(comandos[0], a, b);
-
-        barramento_c(r, comandos[1], s.saidad);
-
-        mem(r, dados, comandos[2]);
-
-        log << "-> Registradores depois da instrução:"       << '\n';
-
-        imprime_registradores(log, r);
-
-        log << "------------------------------------------" << '\n';
-
-
-        ciclo++;
+        executa_instrucao(*atual, argumento, ir, r, dados, NOME_DADOS, log, ciclo);
     }
 // 			------------ fim do programa ------------------
-
+    log << "Ciclo: " << ciclo << '\n';
+    log << "Fim das instrucoes, EOP." << '\n';
+    log << "------------------------------------------" << '\n';
 
     entrada.close();
+    dados.close();
     log.close();
 	return 0;
 }

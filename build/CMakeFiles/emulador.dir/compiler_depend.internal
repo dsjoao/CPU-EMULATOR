@@ -25,6 +25,7 @@
 CMakeFiles/emulador.dir/src/main.cpp.o
  /home/dsjoao/Projects/emulador_cpu/CPU-EMULATOR/src/main.cpp
  /home/dsjoao/Projects/emulador_cpu/CPU-EMULATOR/src/cpu.cpp
+ /home/dsjoao/Projects/emulador_cpu/CPU-EMULATOR/src/instrucoes.cpp
  /home/dsjoao/Projects/emulador_cpu/CPU-EMULATOR/src/registradores.cpp
  /home/dsjoao/Projects/emulador_cpu/CPU-EMULATOR/src/ula.cpp
  /usr/include/alloca.h

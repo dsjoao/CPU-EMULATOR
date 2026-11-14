@@ -23,6 +23,7 @@
 
 CMakeFiles/emulador.dir/src/main.cpp.o: /home/dsjoao/Projects/emulador_cpu/CPU-EMULATOR/src/main.cpp \
   /home/dsjoao/Projects/emulador_cpu/CPU-EMULATOR/src/cpu.cpp \
+  /home/dsjoao/Projects/emulador_cpu/CPU-EMULATOR/src/instrucoes.cpp \
   /home/dsjoao/Projects/emulador_cpu/CPU-EMULATOR/src/registradores.cpp \
   /home/dsjoao/Projects/emulador_cpu/CPU-EMULATOR/src/ula.cpp \
   /usr/include/alloca.h \
@@ -752,6 +753,8 @@ CMakeFiles/emulador.dir/src/main.cpp.o: /home/dsjoao/Projects/emulador_cpu/CPU-E
 
 /usr/include/c++/16/bits/std_abs.h:
 
+/usr/include/c++/16/bits/sstream.tcc:
+
 /usr/include/c++/16/iterator:
 
 /usr/include/bits/types/struct_tm.h:
@@ -904,14 +907,6 @@ CMakeFiles/emulador.dir/src/main.cpp.o: /home/dsjoao/Projects/emulador_cpu/CPU-E
 
 /usr/include/asm-generic/int-ll64.h:
 
-/usr/include/bits/types/time_t.h:
-
-/usr/include/c++/16/unordered_map:
-
-/usr/include/c++/16/bits/localefwd.h:
-
-/usr/include/c++/16/bits/shared_ptr_atomic.h:
-
 /usr/include/c++/16/coroutine:
 
 /usr/include/bits/fp-logb.h:
@@ -956,12 +951,6 @@ CMakeFiles/emulador.dir/src/main.cpp.o: /home/dsjoao/Projects/emulador_cpu/CPU-E
 
 /usr/include/assert.h:
 
-/usr/include/c++/16/bits/quoted_string.h:
-
-/usr/include/c++/16/bits/uses_allocator.h:
-
-/usr/include/asm-generic/posix_types.h:
-
 /usr/include/uchar.h:
 
 /usr/include/bits/pthread_stack_min-dynamic.h:
@@ -970,23 +959,33 @@ CMakeFiles/emulador.dir/src/main.cpp.o: /home/dsjoao/Projects/emulador_cpu/CPU-E
 
 /usr/include/c++/16/bits/ostream_insert.h:
 
-/usr/include/bits/types/sigevent_t.h:
-
-/usr/include/c++/16/exception:
-
-/usr/include/c++/16/bits/random.h:
-
 /usr/lib/crti.o:
+
+/usr/include/bits/typesizes.h:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc.a:
+
+/usr/include/c++/16/bits/new_except.h:
+
+/usr/include/errno.h:
+
+/usr/include/bits/getopt_posix.h:
+
+/usr/include/c++/16/bits/regex_error.h:
+
+/usr/include/bits/types/sigevent_t.h:
 
 /usr/include/c++/16/ranges:
 
 /usr/include/bits/types/__fpos_t.h:
 
-/usr/include/c++/16/bits/char_traits.h:
-
 /usr/include/bits/types/sig_atomic_t.h:
 
-/usr/include/bits/typesizes.h:
+/usr/include/c++/16/bits/char_traits.h:
+
+/usr/include/c++/16/exception:
+
+/usr/include/c++/16/bits/random.h:
 
 /usr/include/c++/16/cstring:
 
@@ -1029,16 +1028,6 @@ CMakeFiles/emulador.dir/src/main.cpp.o: /home/dsjoao/Projects/emulador_cpu/CPU-E
 /usr/include/bits/mathcalls-macros.h:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/libatomic.so:
-
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc.a:
-
-/usr/include/c++/16/bits/new_except.h:
-
-/usr/include/errno.h:
-
-/usr/include/bits/getopt_posix.h:
-
-/usr/include/c++/16/bits/regex_error.h:
 
 /usr/include/c++/16/tuple:
 
@@ -1108,6 +1097,12 @@ CMakeFiles/emulador.dir/src/main.cpp.o: /home/dsjoao/Projects/emulador_cpu/CPU-E
 
 /usr/include/asm/posix_types.h:
 
+/usr/include/c++/16/bits/quoted_string.h:
+
+/usr/include/c++/16/bits/uses_allocator.h:
+
+/usr/include/asm-generic/posix_types.h:
+
 /usr/include/c++/16/scoped_allocator:
 
 /usr/include/c++/16/new:
@@ -1119,6 +1114,8 @@ CMakeFiles/emulador.dir/src/main.cpp.o: /home/dsjoao/Projects/emulador_cpu/CPU-E
 /usr/include/c++/16/condition_variable:
 
 /usr/lib/gcc/x86_64-pc-linux-gnu/16/libgcc_s.so:
+
+/home/dsjoao/Projects/emulador_cpu/CPU-EMULATOR/src/instrucoes.cpp:
 
 /usr/include/asm/types.h:
 
@@ -1198,12 +1195,6 @@ CMakeFiles/emulador.dir/src/main.cpp.o:
 
 /usr/include/bits/types.h:
 
-/usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o:
-
-/usr/include/c++/16/bits/ostream.tcc:
-
-/usr/include/bits/siginfo-arch.h:
-
 /usr/include/inttypes.h:
 
 /usr/include/c++/16/bits/chrono.h:
@@ -1213,6 +1204,20 @@ CMakeFiles/emulador.dir/src/main.cpp.o:
 /usr/include/bits/siginfo-consts.h:
 
 /usr/include/bits/libc-header-start.h:
+
+/usr/include/bits/types/time_t.h:
+
+/usr/include/c++/16/unordered_map:
+
+/usr/include/c++/16/bits/localefwd.h:
+
+/usr/lib/gcc/x86_64-pc-linux-gnu/16/crtbeginS.o:
+
+/usr/include/bits/siginfo-arch.h:
+
+/usr/include/c++/16/bits/ostream.tcc:
+
+/usr/include/c++/16/bits/shared_ptr_atomic.h:
 
 /usr/include/bits/uintn-identity.h:
 
@@ -1477,5 +1482,3 @@ CMakeFiles/emulador.dir/src/main.cpp.o:
 /usr/include/bits/mathcalls-helper-functions.h:
 
 /usr/include/c++/16/bits/specfun.h:
-
-/usr/include/c++/16/bits/sstream.tcc:
