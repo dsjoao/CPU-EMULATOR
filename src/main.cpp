@@ -54,7 +54,7 @@ int main() {
     };
 
     // --- abrindo os arquivos ---
-    ifstream entrada("instruções.txt");
+    ifstream entrada("instrucoes.txt");
     ofstream  log	("log.txt");  // ofstream cria automaticamente arquivos de escrita
     string NOME_DADOS = "dados.txt";
     fstream  dados	(NOME_DADOS);

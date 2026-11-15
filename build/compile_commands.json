@@ -1,8 +1,8 @@
 [
 {
-  "directory": "/home/dsjoao/Projects/emulador_cpu/CPU-EMULATOR/build",
-  "command": "/usr/bin/c++  -I/home/dsjoao/Projects/emulador_cpu/CPU-EMULATOR/include -std=c++20 -g -O0 -o CMakeFiles/emulador.dir/src/main.cpp.o -c /home/dsjoao/Projects/emulador_cpu/CPU-EMULATOR/src/main.cpp",
-  "file": "/home/dsjoao/Projects/emulador_cpu/CPU-EMULATOR/src/main.cpp",
+  "directory": "/home/luca/Projetos/CPU-EMULATOR/build",
+  "command": "/usr/bin/c++   -std=c++20 -g -O0 -o CMakeFiles/emulador.dir/src/main.cpp.o -c /home/luca/Projetos/CPU-EMULATOR/src/main.cpp",
+  "file": "/home/luca/Projetos/CPU-EMULATOR/src/main.cpp",
   "output": "CMakeFiles/emulador.dir/src/main.cpp.o"
 }
 ]

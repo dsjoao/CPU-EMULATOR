@@ -147,14 +147,14 @@ void imprime_barramentos(ostream &out, unsigned long b, unsigned long c){
 void imprime_registradores(ostream &out, const Reg &r){
 	out << "mar = " << r.mar << '\n';
 	out << "mdr = " << r.mdr << '\n';
-	out << "pc = "  << r.pc  << '\n';
+	out << "pc  = "  << r.pc << '\n';
 	out << "mbr = " << r.mbr << '\n';
-	out << "sp = "  << r.sp  << '\n';
-	out << "lv = "  << r.lv  << '\n';
+	out << "sp  = "  << r.sp << '\n';
+	out << "lv  = "  << r.lv << '\n';
 	out << "cpp = " << r.cpp << '\n';
 	out << "tos = " << r.tos << '\n';
 	out << "opc = " << r.opc << '\n';
-	out << "h = "   << r.h   << '\n';
+	out << "h   = "   << r.h << '\n';
 }
 
 void imprime_dados(ostream &log, fstream &dados){
