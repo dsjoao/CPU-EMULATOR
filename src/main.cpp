@@ -13,14 +13,14 @@ int main() {
 	int     ciclo = 1;
     string  ir; // registrador de instrução
     Reg     r;
-    r.mar = 0b100;
+    r.mar = 0b110;
     r.mdr = 0;
     r.pc  = 0;
     r.mbr = 0;
-    r.sp  = 0b100;
-    r.lv  = 0;
+    r.sp  = 0b110;
+    r.lv  = 0b11;
     r.cpp = 0;
-    r.tos = 0;
+    r.tos = 0b1000;
     r.opc = 0;
     r.h   = 0;
 
