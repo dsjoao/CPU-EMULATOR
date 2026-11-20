@@ -58,12 +58,12 @@ void escreve_dados(fstream &dados, const string &nome, const vector<bitset<32>> 
  * saida[3] = qual registrador vai fornecer os dados para o barr b
  */
 vector<bitset<32>> entrada_to_comandos(const string &ir){
-    vector<bitset<32>> saida(4);
-    saida[0] = traducao(ir.substr(0 ,8));
-    saida[1] = traducao(ir.substr(8 ,9));
-    saida[2] = traducao(ir.substr(17,2));
-    saida[3] = traducao(ir.substr(19,4));
-    return saida;
+  vector<bitset<32>> saida(4);
+  saida[0] = traducao(ir.substr(0 ,8));
+  saida[1] = traducao(ir.substr(8 ,9));
+  saida[2] = traducao(ir.substr(17,2));
+  saida[3] = traducao(ir.substr(19,4));
+  return saida;
 }
 // -----------------------------------------------------------------------
 /*
@@ -72,7 +72,7 @@ vector<bitset<32>> entrada_to_comandos(const string &ir){
  * @return SaidaUla {bitset<32> saida; bitset<32> saida deslocada; bool vaiUm; bool n; bool z;}
  */
 SaidaUla carrega_ula(bitset<32> in, bitset<32> a, bitset<32> b){
-    return ula(in.test(7),in.test(6),in.test(5),in.test(4),in.test(3),in.test(2),in.test(1),in.test(0), a, b);
+  return ula(in.test(7),in.test(6),in.test(5),in.test(4),in.test(3),in.test(2),in.test(1),in.test(0), a, b);
 }
 
 // -----------------------------------------------------------------------
